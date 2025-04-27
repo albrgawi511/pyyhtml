@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>التقط صورة وأرسلها</title>
+</head>
+<body>
+  <h2>التقط صورة بالكاميرا وأرسلها</h2>
+
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" accept="image/*" capture="environment" name="photo" id="photoInput" required>
+    <br><br>
+    <button type="submit">ارسل الصورة</button>
+  </form>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fileInput = document.getElementById('photoInput');
+      const formData = new FormData();
+      formData.append('photo', fileInput.files[0]);
+
+      await fetch('https://YOUR_SERVER_LINK/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      alert('تم الارسال بنجاح!');
+    });
+  </script>
+</body>
+</html>
